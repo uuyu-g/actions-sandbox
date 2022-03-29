@@ -9,18 +9,8 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - uses: actions/cache@v2
-        id: node_modules_cache_id
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+      - name: Setup dependencies
+        uses: ./.github/actions/steps-deps
       - run: npm ci
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
 
@@ -28,36 +18,14 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - uses: actions/checkout@v2
-      - name: Restore node_modules
-        id: node_modules_cache_id
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+      - name: Setup dependencies
+        uses: ./.github/actions/steps-deps
       - run: npm run test:ci --if-present
 
   build:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - uses: actions/checkout@v2
-      - name: Restore node_modules
-        id: node_modules_cache_id
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+      - name: Setup dependencies
+        uses: ./.github/actions/steps-deps
       - run: npm run build --if-present
