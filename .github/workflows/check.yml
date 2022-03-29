@@ -9,7 +9,6 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: Setup dependencies
         uses: ./.github/actions/steps-deps
       - run: npm ci
@@ -19,7 +18,6 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: Setup dependencies
         uses: ./.github/actions/steps-deps
       - run: npm run test:ci --if-present
@@ -28,7 +26,6 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: Setup dependencies
         uses: ./.github/actions/steps-deps
       - run: npm run build --if-present
