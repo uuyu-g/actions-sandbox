@@ -23,8 +23,9 @@ jobs:
             ${{ runner.os }}-node-
       - run: npm ci
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
+      - run: npm run build --if-present
 
-  lint:
+  test:
     needs: setup
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +42,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - run: npm run lint --if-present
+      - run: npm run test --if-present
 
   build:
     needs: setup
