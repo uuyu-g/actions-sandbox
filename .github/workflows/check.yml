@@ -18,7 +18,7 @@ jobs:
         id: node_modules_cache_id
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
       - run: npm ci
@@ -38,10 +38,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - run: npm run test --if-present
+      - run: npm run test:ci --if-present
 
   build:
     needs: setup
@@ -57,7 +57,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
       - run: npm run build --if-present
