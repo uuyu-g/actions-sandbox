@@ -10,14 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/setup-dependencies
+      - name: Setup dependencies
+        uses: ./.github/actions/setup-dependencies
 
   test:
     needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/setup-dependencies
+      - name: Setup dependencies
+        uses: ./.github/actions/setup-dependencies
+
       - run: npm run test:ci --if-present
 
   build:
@@ -25,5 +28,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/setup-dependencies
+      - name: Setup dependencies
+        uses: ./.github/actions/setup-dependencies
       - run: npm run build --if-present
