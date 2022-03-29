@@ -10,18 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup dependencies
-        uses: ./.github/actions/steps-deps
-      # - run: npm ci
-      #   if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
+      - uses: ./.github/actions/setup-dependencies
 
   test:
     needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup dependencies
-        uses: ./.github/actions/steps-deps
+      - uses: ./.github/actions/setup-dependencies
       - run: npm run test:ci --if-present
 
   build:
@@ -29,6 +25,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup dependencies
-        uses: ./.github/actions/steps-deps
+      - uses: ./.github/actions/setup-dependencies
       - run: npm run build --if-present

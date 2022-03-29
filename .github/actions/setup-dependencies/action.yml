@@ -1,4 +1,4 @@
-name: Setup the dependencies
+name: Setup dependencies
 description: This composite run steps require the dependencies cache before running.
 
 runs:
