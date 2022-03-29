@@ -12,8 +12,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Setup dependencies
         uses: ./.github/actions/steps-deps
-      - run: npm ci
-        if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
+      # - run: npm ci
+      #   if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
 
   test:
     needs: setup
